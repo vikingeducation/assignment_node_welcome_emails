@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 // Body Parser
 // ----------------------------------------
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // ----------------------------------------
 // Public
@@ -61,7 +61,8 @@ app.post("/login", (req, res, next) => {
   EmailService.send(options)
     .then(result => {
       console.log(result);
-      res.render("login", {result});
+      result = JSON.stringify(result);
+      res.render("login", { result });
     })
     .catch(next);
 });
