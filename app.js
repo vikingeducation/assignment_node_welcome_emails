@@ -61,7 +61,7 @@ app.post("/login", (req, res, next) => {
   EmailService.send(options)
     .then(result => {
       console.log(result);
-      result = JSON.stringify(result);
+      result = JSON.stringify(result, null, 2);
       res.render("login", { result });
     })
     .catch(next);
