@@ -20,87 +20,12 @@ app.use((req, res, next) => {
 // Body Parser
 // ----------------------------------------
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// ----------------------------------------
-// Sessions/Cookies
-// ----------------------------------------
-const cookieSession = require("cookie-session");
-
-app.use(
-  cookieSession({
-    name: "session",
-    keys: ["Farts"]
-  })
-);
-
-app.use((req, res, next) => {
-  app.locals.session = req.session;
-  next();
-});
+app.use(bodyParser.urlencoded({extended: true}));
 
 // ----------------------------------------
 // Public
 // ----------------------------------------
 app.use(express.static(`${__dirname}/public`));
-
-// ----------------------------------------
-// Referrer
-// ----------------------------------------
-app.use((req, res, next) => {
-  req.session.backUrl = req.header("Referer") || "/";
-  next();
-});
-
-// ----------------------------------------
-// Logging
-// ----------------------------------------
-const morgan = require("morgan");
-
-// Add :data format token
-// to `tiny` format
-let format = [
-  ":separator",
-  ":newline",
-  ":method ",
-  ":url ",
-  ":status ",
-  ":res[content-length] ",
-  "- :response-time ms",
-  ":newline",
-  ":newline",
-  ":data",
-  ":newline",
-  ":separator",
-  ":newline",
-  ":newline"
-].join("");
-
-// Use morgan middleware with
-// custom format
-app.use(morgan(format));
-
-// Helper tokens
-morgan.token("separator", () => "****");
-morgan.token("newline", () => "\n");
-
-// Set data token to output
-// req query params and body
-morgan.token("data", (req, res, next) => {
-  let data = [];
-  ["query", "params", "body", "session"].forEach(key => {
-    if (req[key]) {
-      let capKey = key[0].toUpperCase() + key.substr(1);
-      let value = JSON.stringify(req[key], null, 2);
-      data.push(`${capKey}: ${value}`);
-    }
-  });
-  data = highlight(data.join("\n"), {
-    language: "json",
-    ignoreIllegals: true
-  });
-  return `${data}`;
-});
 
 // ----------------------------------------
 // Template Engine
@@ -124,22 +49,22 @@ app.get("/", (req, res) => {
   res.render("login");
 });
 
-app.post("/emails", (req, res, next) => {
+app.post("/login", (req, res, next) => {
   const options = {
-    from: req.body.email_options.from,
-    to: req.body.email_options.to,
-    subject: req.body.email_options.subject,
-    text: req.body.email_options.message,
-    html: `<p>${req.body.email_options.message}</p>`
+    to: req.body.email,
+    from: "fbi@fbi.gov",
+    subject: "FBI things",
+    text: `Welcome to the FBI, ${req.body.name}`,
+    html: `<p>Welcome to the FBI, ${req.body.name}</p>`
   };
 
   EmailService.send(options)
     .then(result => {
-      res.render("emails/new", { result });
+      console.log(result);
+      res.render("login", {result});
     })
     .catch(next);
 });
-
 // ----------------------------------------
 // Server
 // ----------------------------------------
@@ -166,7 +91,7 @@ app.use((err, req, res, next) => {
   if (err.stack) {
     err = err.stack;
   }
-  res.status(500).render("errors/500", { error: err });
+  res.status(500).send(err);
 });
 
 module.exports = app;
