@@ -135,7 +135,7 @@ app.post("/users", (req, res, next) => {
     req.body.password;
 
   const options = {
-    from: process.env.EMAIL_USER,
+    from: "demo.eglelibby@gmail.com",
     to: req.body.email,
     subject: "Registration successful",
     text,
