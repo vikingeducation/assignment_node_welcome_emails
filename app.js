@@ -113,8 +113,10 @@ app.get('/users/register', (req, res) => {
 app.post('/users/new', (req, res, next) => {
   const text = `You have successfully signed up with the following information: \nFirst name: ${req.body.user.firstName} \nLast name: ${req.body.user.lastName} \nEmail: ${req.body.user.email} \nPassword: ${req.body.user.password}`;
 
+  var options;
+
   if (process.env.NODE_ENV === 'production') {
-    const options = {
+    options = {
       from: process.env.SENDGRID_USERNAME,
       to: req.body.user.email,
       subject: `Welcome aboard, ${req.body.user.firstName} ${req.body.user.lastName}`,
@@ -122,7 +124,7 @@ app.post('/users/new', (req, res, next) => {
       html: `<p>${text}</p>`
     };
   } else {
-    const options = {
+    options = {
       from: 'nicromvfs@gmail.com',
       to: req.body.user.email,
       subject: `Welcome aboard, ${req.body.user.firstName} ${req.body.user.lastName}`,
