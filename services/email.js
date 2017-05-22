@@ -4,7 +4,6 @@ const sendGridTransport = require('nodemailer-sendgrid-transport');
 
 let _options;
 
-let _options;
 if (process.env.NODE_ENV === 'production') {
   _options = sendGridTransport({
     service: 'SendGrid',
