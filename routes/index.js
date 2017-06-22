@@ -21,6 +21,7 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   let message = `Greetings ${req.body.registration.fname} ${req.body.registration.lname}! Thank you for signing up!`;
   const options = {
+    from: "node_welcome_email@gmail.com",
     to: req.body.registration.email,
     subject: "Welcome!",
     text: message,
