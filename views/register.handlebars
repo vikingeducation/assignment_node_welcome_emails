@@ -1,0 +1,24 @@
+<header class="page-header text-center">
+  <h1>Register for an account today!</h1>
+</header>
+
+<form action="/register" method="post">
+  <div class="form-group">
+    <label for="registration_fname">First Name</label>
+    <input type="text" id="registration_fname" name="registration[fname]" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="registration_lname">Last Name</label>
+    <input type="text" id="registration_lname" name="registration[lname]" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="registration_email">Email Address</label>
+    <input type="email" id="registration_email" name="registration[email]" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-success">
+  </div>
+</form>
