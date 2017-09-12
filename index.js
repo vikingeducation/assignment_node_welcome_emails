@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -15,24 +17,34 @@ app.engine(
 app.set("view engine", "handlebars");
 
 app.get("/", (req, res) => {
-  //body parser the form data
-
   res.render("index");
 });
 
-app.post("/new", (req, res) => {
+app.post("/new", async (req, res) => {
   const { firstName, lastName, email } = req.body;
+
+  console.log("env vars", process.env.EMAIL_USER);
   const options = {
     from: process.env.EMAIL_USER,
     to: email,
-    subject: 'Welcome'
-    text:`Hey! Welcome ${firstName} ${lastName}`
-    html:`<p>Hey! Welcome ${firstName} ${lastName}</p>`
-  }
+    subject: "Welcome",
+    text: `Hey! Welcome ${firstName} ${lastName}`,
+    html: `<p>Hey! Welcome ${firstName} ${lastName}</p>`
+  };
 
-  res.redirect("index", { message: "You registered!" });
+  try {
+    const result = await emailService.send(options);
+    return res.render("index", {
+      message: "You registered!",
+      result: JSON.stringify(result, null, 2)
+    });
+  } catch (err) {
+    return res.json(err);
+  }
 });
 
-app.listen(3000, "0.0.0.0", () => {
+app.set("port", process.env.PORT || 3000);
+
+app.listen(app.get("port"), () => {
   console.log("listening");
 });
