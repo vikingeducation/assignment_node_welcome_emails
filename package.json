@@ -16,16 +16,20 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thebopshoobop/assignment_node_welcome_emails.git"
+    "url":
+      "git+https://github.com/thebopshoobop/assignment_node_welcome_emails.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thebopshoobop/assignment_node_welcome_emails/issues"
+    "url":
+      "https://github.com/thebopshoobop/assignment_node_welcome_emails/issues"
   },
-  "homepage": "https://github.com/thebopshoobop/assignment_node_welcome_emails#readme"
+  "homepage":
+    "https://github.com/thebopshoobop/assignment_node_welcome_emails#readme"
 }
