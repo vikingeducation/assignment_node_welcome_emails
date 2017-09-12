@@ -34,6 +34,7 @@ app.post("/new", async (req, res) => {
 
   try {
     const result = await emailService.send(options);
+    console.log("result: ", result);
     return res.render("index", {
       message: "You registered!",
       result: JSON.stringify(result, null, 2)
