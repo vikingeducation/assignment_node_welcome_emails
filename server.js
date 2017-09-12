@@ -45,10 +45,13 @@ app.post("/users/new", (req, res) => {
   options = {
     from: process.env.EMAIL_USER,
     to: req.body.user.email,
-    subject: `Welcome Aboard, Sailor!`,
+    subject: `Welcome Aboard, ${req.body.user.fname} ${req.body.user.lname}!`,
     text: message,
     html: `<p>${message}</p>`
   };
+
+  console.log(options)
+
   EmailService.send(options).then(result => {
     res.render("users/finish", { flash: result });
   });
