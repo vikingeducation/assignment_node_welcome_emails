@@ -1,6 +1,9 @@
 {
   "name": "assignment_node_welcome_emails",
   "version": "1.0.0",
+  "engines": {
+    "node": ">= 7.6.0"
+  },
   "description": "Send emails in Node!",
   "main": "server.js",
   "scripts": {
