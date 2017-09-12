@@ -23,7 +23,6 @@ app.get("/", (req, res) => {
 app.post("/new", async (req, res) => {
   const { firstName, lastName, email } = req.body;
 
-  console.log("env vars", process.env.EMAIL_USER);
   const options = {
     from: process.env.EMAIL_USER,
     to: email,
