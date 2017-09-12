@@ -10,7 +10,9 @@
     "express-flash-messages": "^0.1.1",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.5",
-    "load-helpers": "^1.0.1"
+    "load-helpers": "^1.0.1",
+    "nodemailer": "^4.1.0",
+    "nodemailer-sendgrid-transport": "^0.2.0"
   },
   "devDependencies": {},
   "scripts": {

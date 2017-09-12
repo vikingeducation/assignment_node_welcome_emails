@@ -20,7 +20,13 @@
 <body>
   {{> shared/_nav }}
   <main class="container">
-    {{> shared/_flash }} {{{ body }}}
+    {{> shared/_flash }}
+    {{#if status}}
+      <p>{{status}}</p>
+    {{/if}}
+     {{{ body }}}
+    }
+    }
   </main>
 </body>
 
