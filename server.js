@@ -20,6 +20,7 @@ const nodemailer = require("nodemailer");
 const sendGridTransport = require("nodemailer-sendgrid-transport");
 
 let transport_options;
+let _transport;
 if (process.env.NODE_ENV === "production") {
   transport_options = {
     service: "SendGrid",
@@ -28,6 +29,9 @@ if (process.env.NODE_ENV === "production") {
       api_key: process.env.SENDGRID_PASSWORD
     }
   };
+  _transporter = nodemailer.createTransport(
+    sendGridTransport(transport_options)
+  );
 } else {
   transport_options = {
     service: "gmail",
@@ -36,9 +40,8 @@ if (process.env.NODE_ENV === "production") {
       pass: process.env.EMAIL_PASS
     }
   };
+  _transporter = nodemailer.createTransport(transport_options);
 }
-
-const _transporter = nodemailer.createTransport(transport_options);
 
 const EmailService = {
   send: options => {
