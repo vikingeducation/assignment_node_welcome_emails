@@ -40,6 +40,7 @@ app.post("/new", async (req, res) => {
       result: JSON.stringify(result, null, 2)
     });
   } catch (err) {
+    console.log("err: ", err);
     return res.json(err);
   }
 });
