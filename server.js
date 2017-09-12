@@ -21,6 +21,8 @@ const sendGridTransport = require("nodemailer-sendgrid-transport");
 
 let transport_options;
 let _transport;
+
+// production use case
 if (process.env.NODE_ENV === "production") {
   transport_options = {
     service: "SendGrid",
@@ -33,6 +35,7 @@ if (process.env.NODE_ENV === "production") {
     sendGridTransport(transport_options)
   );
 } else {
+  // development use case
   transport_options = {
     service: "gmail",
     auth: {
@@ -43,6 +46,7 @@ if (process.env.NODE_ENV === "production") {
   _transporter = nodemailer.createTransport(transport_options);
 }
 
+// Email service
 const EmailService = {
   send: options => {
     return new Promise((resolve, reject) => {
@@ -53,14 +57,17 @@ const EmailService = {
   }
 };
 
+// redirect
 app.get("/", (req, res, next) => {
   res.redirect("/users/new");
 });
 
+// GET route
 app.get("/users/new", (req, res) => {
   res.render("users/new");
 });
 
+//POST route
 app.post("/users/new", (req, res) => {
   const message = `Welcome to this amazing website! You've made the right choice by signing up with us. We will only spam you 16x per hour. That's what makes us great!`;
   options = {
@@ -71,9 +78,13 @@ app.post("/users/new", (req, res) => {
     html: `<p>${message}</p>`
   };
 
-  EmailService.send(options).then(result => {
-    res.render("users/finish", { flash: result });
-  });
+  EmailService.send(options)
+    .then(result => {
+      res.render("users/finish", { flash: result });
+    })
+    .catch(e => {
+      console.error(e);
+    });
 });
 
 var port = process.env.PORT || process.argv[2] || 3000;
