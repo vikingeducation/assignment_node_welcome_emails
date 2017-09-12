@@ -17,14 +17,28 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 const nodemailer = require("nodemailer");
+const sendGridTransport = require("nodemailer-sendgrid-transport");
 
-const _transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+let transport_options;
+if (process.env.NODE_ENV === "production") {
+  transport_options = {
+    service: "SendGrid",
+    auth: {
+      api_user: process.env.SENDGRID_USERNAME,
+      api_key: process.env.SENDGRID_PASSWORD
+    }
+  };
+} else {
+  transport_options = {
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    }
+  };
+}
+
+const _transporter = nodemailer.createTransport(transport_options);
 
 const EmailService = {
   send: options => {
@@ -35,6 +49,10 @@ const EmailService = {
     });
   }
 };
+
+app.get("/", (req, res, next) => {
+  res.redirect("/users/new");
+});
 
 app.get("/users/new", (req, res) => {
   res.render("users/new");
@@ -49,8 +67,6 @@ app.post("/users/new", (req, res) => {
     text: message,
     html: `<p>${message}</p>`
   };
-
-  console.log(options)
 
   EmailService.send(options).then(result => {
     res.render("users/finish", { flash: result });
