@@ -1,0 +1,28 @@
+{
+  "name": "assignment_node_welcome_emails",
+  "version": "1.0.0",
+  "description": "Eric & Andrew",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricGlover/assignment_node_welcome_emails.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EricGlover/assignment_node_welcome_emails/issues"
+  },
+  "homepage": "https://github.com/EricGlover/assignment_node_welcome_emails#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "express-flash-messages": "^0.1.1",
+    "express-handlebars": "^3.0.0",
+    "nodemailer": "^4.1.0",
+    "nodemailer-sendgrid-transport": "^0.2.0"
+  }
+}
