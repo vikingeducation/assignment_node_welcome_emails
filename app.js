@@ -58,3 +58,17 @@ args.push(() => {
 });
 
 app.listen.apply(app, args);
+
+// ----------------------------------------
+// Error Handling
+// ----------------------------------------
+app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  if (err.stack) {
+    err = err.stack;
+  }
+  res.status(500).render("errors/500", { error: err });
+});
