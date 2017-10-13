@@ -10,14 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chuckinabox/assignment_node_welcome_emails.git"
+    "url":
+      "git+https://github.com/chuckinabox/assignment_node_welcome_emails.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chuckinabox/assignment_node_welcome_emails/issues"
+    "url":
+      "https://github.com/chuckinabox/assignment_node_welcome_emails/issues"
   },
-  "homepage": "https://github.com/chuckinabox/assignment_node_welcome_emails#readme",
+  "homepage":
+    "https://github.com/chuckinabox/assignment_node_welcome_emails#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
@@ -26,6 +29,7 @@
     "morgan": "^1.9.0",
     "morgan-toolkit": "^1.0.2",
     "nodemailer": "^4.1.3",
-    "nodemailer-sendgrid-transport": "^0.2.0"
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "sendgrid": "^5.2.3"
   }
 }
