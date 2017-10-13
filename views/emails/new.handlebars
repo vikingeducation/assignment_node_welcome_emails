@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3" style="border:2px solid black; text-align:center; border-radius: 1em; margin-top: 2em;">
+      {{#if result}}
+      <pre style="text-align:left;">{{result.a}}</pre>
+      {{/if}}
+      <h4> Email </h4>
+      <form action="/sendEmail" method="post" class="form-group">
+        <input type="text" name="fname" placeholder="First Name" class="form-control"><br>
+        <input type="text" name="lname" placeholder="Last Name" class="form-control"><br>
+        <input type="email" name="email" placeholder="Email" class="form-control"><br>
+        <input type="password" name="password" placeholder="Password (For Demo Purposes)" class="form-control"><br>
+        <button type="submit" class="btn btn-primary">EMAIL ME!</button>
+      </form>
+    </div>
+  </div>
+</div>
