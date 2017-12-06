@@ -101,22 +101,35 @@ app.set("view engine", "handlebars");
 const EmailService = require("./services/email");
 
 app.get("/", (req, res) => {
-	res.render("emails/new");
+	res.render("users/register");
 });
 
-app.post("/emails", (req, res, next) => {
+app.post("/register", (req, res, next) => {
+	const text = `
+	Its nodemailer my dudes\n
+\n
+	Welcome ${req.body.fname} ${req.body.lname}\n
+\n
+	Keep this info safe:\n
+	Email: ${req.body.email}\n
+	password: ${req.body.email}\n
+\n
+	take a shower\n
+	`;
+
 	const options = {
-		from: req.body.email_options.from,
-		to: req.body.email_options.to,
-		subject: req.body.email_options.subject,
-		text: req.body.email_options.message,
-		html: `<p>${req.body.email_options.message}</p>`
+		from: "nodemailer party time",
+		to: req.body.email,
+		subject: `Welcome to nodemailer ${req.body.fname} ${req.body.lname}`,
+		text: text,
+		html: `<p>${text}</p>`
 	};
 
 	EmailService.send(options)
 		.then(result => {
+			result = JSON.stringify(result, 0, 2);
 			req.flash("success", "Sent!");
-			res.render("emails/new", { result });
+			res.render("users/home", { result });
 		})
 		.catch(next);
 });
