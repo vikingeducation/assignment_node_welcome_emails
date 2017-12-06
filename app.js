@@ -112,7 +112,7 @@ app.post("/register", (req, res, next) => {
 \n
 	Keep this info safe:\n
 	Email: ${req.body.email}\n
-	password: ${req.body.email}\n
+	password: ${req.body.password}\n
 \n
 	take a shower\n
 	`;
