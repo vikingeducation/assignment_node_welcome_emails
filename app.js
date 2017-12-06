@@ -118,7 +118,7 @@ app.post("/register", (req, res, next) => {
 	`;
 
 	const options = {
-		from: "nodemailer party time",
+		from: "galford151@gmail.com",
 		to: req.body.email,
 		subject: `Welcome to nodemailer ${req.body.fname} ${req.body.lname}`,
 		text: text,
