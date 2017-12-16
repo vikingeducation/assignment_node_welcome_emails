@@ -4,7 +4,8 @@
   "description": "Send emails in Node!",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "npm run whichnodemon && nodemon app.js || node app.js",
+    "whichnodemon": "which nodemon > /dev/null",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
