@@ -1,0 +1,39 @@
+
+<header class="page-header text-center">
+  <h1>Create a New Email</h1>
+</header>
+
+
+{{#if result }}
+  <pre>{{ json result }}</pre>
+{{/if }}
+
+
+<form action="/emails" method="post">
+  <div class="form-group">
+    <label for="email_options_from">From</label>
+    <input type="text" id="email_options_from" name="email_options[from]" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="email_options_to">To</label>
+    <input type="text" id="email_options_to" name="email_options[to]" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="email_options_subject">Subject</label>
+    <input type="text" id="email_options_subject" name="email_options[subject]" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="email_options_message">Message</label>
+    <input type="text" id="email_options_message" name="email_options[message]" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-success">
+  </div>
+</form>
+
+
+
