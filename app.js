@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Site Config
 // ----------------------------------------
 app.use((req, res, next) => {
-  res.locals.siteTitle = 'Nodemailer Test';
+  res.locals.siteTitle = 'Nodemailer Welcome Emails';
   next();
 });
 
@@ -118,11 +118,11 @@ morgan.token('data', (req, res, next) => {
 // Template Engine
 // ----------------------------------------
 const expressHandlebars = require('express-handlebars');
-const helpers = require('./helpers');
+const h = require('./helpers').registered;
 
 
 const hbs = expressHandlebars.create({
-  helpers,
+  helpers: h,
   partialsDir: 'views',
   defaultLayout: 'application'
 });
@@ -138,23 +138,37 @@ const EmailService = require('./services/email');
 
 
 app.get('/', (req, res) => {
-  res.render('emails/new');
+  res.render('users/new');
 });
 
 
-app.post('/emails', (req, res, next) => {
+app.post('/users', (req, res, next) => {
+  const text =
+    "Hey, welcome aboard " +
+    req.body.first_name +
+    " " +
+    req.body.last_name +
+    "!\n " +
+    "Your registration data: \n" +
+    "Email: " +
+    req.body.email +
+    "\n" +
+    "Password: " +
+    req.body.password;
+
   const options = {
-    from: req.body.email_options.from,
-    to: req.body.email_options.to,
-    subject: req.body.email_options.subject,
-    text: req.body.email_options.message,
-    html: `<p>${ req.body.email_options.message }</p>`
+    from: "maddie.coding@gmail.com",
+    to: req.body.email,
+    subject: "Registration successful",
+    text,
+    html: `<p>${text}</p>`
   };
+
 
   EmailService.send(options)
     .then((result) => {
-      req.flash('success', 'Sent!');
-      res.render('emails/new', { result });
+      req.flash('success', 'Registered!');
+      res.render('users/new', { result });
     })
     .catch(next);
 });
