@@ -34,5 +34,5 @@ Deploy your app to Heroku and verify that you can send email from your deployed 
 
 
 #### Running App:    
-`npm start`
-Deployed at: `https://secure-sea-50812.herokuapp.com`
+`npm start`   
+Deployed at: https://secure-sea-50812.herokuapp.com
