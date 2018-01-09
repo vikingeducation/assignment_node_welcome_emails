@@ -1,0 +1,24 @@
+{{#if results}}
+<pre>{{json results}}</pre>
+{{/if}}
+<form action="/email" method="post">
+  <div class="form-group">
+    <label for="email_option_from">From</label>
+    <input type="text" id="email_option_from" name="email_options[from]" class="form-control" >
+  </div>
+  <div class="form-group">
+    <label for="email_option_to">To</label>
+    <input type="text" id="email_option_to" name="email_options[to]" class="form-control" >
+  </div>
+  <div class="form-group">
+    <label for="email_option_subject">Subject</label>
+    <input type="text" id="email_option_subject" name="email_options[subject]" class="form-control" >
+  </div>
+  <div class="form-group">
+    <label for="email_option_message">Message</label>
+    <input type="text" id="email_option_message" name="email_options[message]" class="form-control" >
+  </div>
+  <div class="form-group">
+    <input type="submit" class="btn btn-success" >
+  </div>
+</form>
