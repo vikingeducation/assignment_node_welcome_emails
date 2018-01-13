@@ -104,7 +104,7 @@ app.post('/users', (req, res, next) => {
   const html = h.html(fname, lname, email, password);
 
   const options = {
-    from: process.env.EMAIL_USER,
+    from: 'node.welcome@mail.com',
     to: req.body.user.email,
     subject: 'Welcome aboard!',
     html: html
