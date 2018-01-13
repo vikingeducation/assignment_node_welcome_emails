@@ -93,6 +93,9 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Routes
+const users = require('./controllers/users');
+
+app.use('/', users);
 
 // Server
 const port = process.env.PORT || process.argv[2] || 3000;
