@@ -1,0 +1,35 @@
+{
+  "name": "assignment_node_welcome_emails",
+  "version": "1.0.0",
+  "description": "Send emails in Node!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run nodemon app.js || node app.js",
+    "nodemon": "which nodemon > /dev/null && nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomahau/assignment_node_welcome_emails.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thomahau/assignment_node_welcome_emails/issues"
+  },
+  "homepage":
+    "https://github.com/thomahau/assignment_node_welcome_emails#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cli-highlight": "^1.2.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "express-flash-messages": "^0.1.1",
+    "express-handlebars": "^3.0.0",
+    "load-helpers": "^1.0.1",
+    "morgan": "^1.9.0",
+    "nodemailer": "^4.4.1",
+    "nodemailer-sendgrid-transport": "^0.2.0"
+  }
+}
