@@ -81,21 +81,42 @@ morgan.token('data', (req, res, next) => {
 
 // Template engine
 const expressHandlebars = require('express-handlebars');
-const helpers = require('./helpers');
+const h = require('./helpers');
 
 const hbs = expressHandlebars.create({
   partialsDir: 'views/',
   defaultLayout: 'application',
-  helpers: helpers
+  helpers: h
 });
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Routes
-const users = require('./controllers/users');
+const EmailService = require('./services/email');
 
-app.use('/', users);
+app.get('/', (req, res) => {
+  res.render('users/new');
+});
+
+app.post('/users', (req, res, next) => {
+  const { fname, lname, email, password } = req.body.user;
+  const html = h.html(fname, lname, email, password);
+
+  const options = {
+    from: process.env.EMAIL_USER,
+    to: req.body.user.email,
+    subject: 'Welcome aboard!',
+    html: html
+  };
+
+  EmailService.send(options)
+    .then(result => {
+      req.flash('success', 'Check your inbox for a welcome email!');
+      res.redirect('back');
+    })
+    .catch(next);
+});
 
 // Server
 const port = process.env.PORT || process.argv[2] || 3000;

@@ -17,8 +17,7 @@
   "bugs": {
     "url": "https://github.com/thomahau/assignment_node_welcome_emails/issues"
   },
-  "homepage":
-    "https://github.com/thomahau/assignment_node_welcome_emails#readme",
+  "homepage": "https://github.com/thomahau/assignment_node_welcome_emails#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cli-highlight": "^1.2.3",
@@ -30,6 +29,7 @@
     "load-helpers": "^1.0.1",
     "morgan": "^1.9.0",
     "nodemailer": "^4.4.1",
+    "nodemailer-html-to-text": "^2.1.0",
     "nodemailer-sendgrid-transport": "^0.2.0"
   }
 }
