@@ -1,2 +1,5 @@
 # assignment_node_welcome_emails
-Send emails in Node!
+Practice sending emails in Node!
+
+Gregory Alford
+
